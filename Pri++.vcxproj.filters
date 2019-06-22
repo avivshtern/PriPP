@@ -26,13 +26,10 @@
     <ClInclude Include="Fruit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FruitIDTree.h">
+    <ClInclude Include="library1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FruitRipeRateTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tree.h">
+    <ClInclude Include="Tree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AVLTree.h">

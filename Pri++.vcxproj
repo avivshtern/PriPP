@@ -127,11 +127,10 @@
     <ClCompile Include="temp_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AVLTree.h" />
     <ClInclude Include="Fruit.h" />
-    <ClInclude Include="FruitIDTree.h" />
-    <ClInclude Include="FruitRipeRateTree.h" />
-    <ClInclude Include="tree.h" />
+    <ClInclude Include="library1.h" />
+    <ClInclude Include="AVLTree.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

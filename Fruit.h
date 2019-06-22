@@ -7,6 +7,7 @@ class Fruit
 {
 	int ID_;
 	int ripeRate_;
+	int parentTreeNum_;
 
 public:
 
@@ -21,6 +22,13 @@ public:
 		ID_ = id;
 		ripeRate_ = ripeRate;
 	}
+
+	Fruit(int id, int ripeRate, int parentTreeNum)
+	{
+		ID_ = id;
+		ripeRate_ = ripeRate;
+		parentTreeNum_ = parentTreeNum;
+	}
 	
 	int getID()
 	{
@@ -30,6 +38,11 @@ public:
 	int getRipeRate()
 	{
 		return ripeRate_;
+	}
+
+	int getParentTreeNum()
+	{
+		return parentTreeNum_;
 	}
 
 };
