@@ -5,7 +5,7 @@
 #include "AVLTree.h"
 #include"Fruit.h"
 #include "Tree.h"
-#define MAX_SIZE 10000
+#include "FieldManager.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -74,8 +74,8 @@ extern "C" {
 	void* Init(int N)
 	{
 		fieldSize = N;
-		return new AVL_Tree<Tree>();
-	};
+		return new FieldManager();
+	}
 
 	/* Description:   Plants a tree in the (i,j) location inside the field.
 	 * Input:         DS - A pointer to the data structure.
@@ -89,10 +89,7 @@ extern "C" {
 	 */
 	StatusType PlantTree(void* DS, int i, int j)
 	{
-		
-		Tree* t = new Tree(calculateTreeNum(i, j, fieldSize));
-		AVL_Tree<Tree>* myTree = (AVL_Tree<Tree>*)DS;
-		myTree->insert(t->getTreeNum(), t);
+		((FieldManager*)DS)->plantTree(calculateTreeNum(i,j,fieldSize));
 	}
 
 	/* Description:   Adds a fruit to (i,j)'th tree.
@@ -114,10 +111,7 @@ extern "C" {
 	{
 		
 		int treeNum=calculateTreeNum(i, j, fieldSize);
-		Fruit* f = new Fruit(fruitID, ripeRate, treeNum);
-		AVL_Tree<Tree>* myTree = (AVL_Tree<Tree>*)DS;
-		Tree t=myTree->
-		
+
 	}
 
 

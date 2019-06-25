@@ -127,6 +127,7 @@
     <ClCompile Include="temp_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FieldManager.h" />
     <ClInclude Include="Fruit.h" />
     <ClInclude Include="library1.h" />
     <ClInclude Include="AVLTree.h" />
