@@ -1,70 +1,21 @@
-
-
 #ifndef _234218_WET1_
 #define _234218_WET1_
 #include "AVLTree.h"
 #include"Fruit.h"
 #include "Tree.h"
 #include "FieldManager.h"
+#include "StatusType.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 	int fieldSize;
 
-	int calculateTreeNum(int i, int j, int N)
+	int calculateTreeNum(int i, int j)
 	{
 		return i * fieldSize + j;
 	}
 
-	/* Return Values
-	 * ----------------------------------- */
-	typedef enum {
-		SUCCESS = 0,
-		FAILURE = -1,
-		ALLOCATION_ERROR = -2,
-		INVALID_INPUT = -3
-	} StatusType;
-
-	/* Required Interface for the Data Structure
-	 * -----------------------------------------*/
-
-
-	//StatusType invalidInputTest(void* DS, int i, int j)
-	//{
-	//	if (DS == NULL || i<0 || i>N - 1 || j<0 || j>N - 1)
-	//	{
-	//		return INVALID_INPUT;
-	//	}
-	//	else return SUCCESS;
-	//}
-
-	//StatusType allocationErrorTest()
-	//{
-	//	if ()
-	//	{
-	//		return ALLOCATION_ERROR;
-	//	}
-	//	else return SUCCESS;
-	//}
-
-	//StatusType failureTestTree(void* DS, int treeNum)
-	//{
-	//	if (searchTree(*DS, treeNum) = !NULL)
-	//	{
-	//		return FAILURE;
-	//	}
-	//	else return SUCCESS;
-	//}
-
-	//StatusType failureTestFruit(void* DS, int fruitID)
-	//{
-	//	if (searchFruit(*DS, fruitID) = !NULL)
-	//	{
-	//		return FAILURE;
-	//	}
-	//	else return SUCCESS;
-	//}	
 	 /* Description:   Initiates the data structure.
 	  * Input:         DS - A pointer to the data structure.
 	  * 			N - size of field
@@ -89,7 +40,18 @@ extern "C" {
 	 */
 	StatusType PlantTree(void* DS, int i, int j)
 	{
-		((FieldManager*)DS)->plantTree(calculateTreeNum(i,j,fieldSize));
+		
+		if (DS == NULL || i<0 || i> fieldSize - 1 || j<0 || j>fieldSize - 1)
+		{
+			return INVALID_INPUT;
+		}
+		if (((FieldManager*)DS)->findTree(calculateTreeNum(i,j)) = !NULL )
+		{
+			return FAILURE;
+		}
+		((FieldManager*)DS)->plantTree(calculateTreeNum(i,j));
+
+		return SUCCESS;
 	}
 
 	/* Description:   Adds a fruit to (i,j)'th tree.
@@ -109,9 +71,16 @@ extern "C" {
 
 	StatusType AddFruit(void* DS, int i, int j, int fruitID, int ripeRate)
 	{
-		
-		int treeNum=calculateTreeNum(i, j, fieldSize);
-
+		if (DS == NULL || i<0 || i> fieldSize - 1 || j<0 || j>fieldSize - 1 || fruitID <= 0|| ripeRate <= 0)
+		{
+			return INVALID_INPUT;
+		}
+		if (((FieldManager*)DS)->findFruitByID(fruitID) = !NULL || ((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
+		{
+			return FAILURE;
+		}
+		((FieldManager*)DS)->addFruit(calculateTreeNum(i, j), fruitID, ripeRate);
+		return SUCCESS;
 	}
 
 
@@ -127,7 +96,20 @@ extern "C" {
 
 
 
-	StatusType PickFruit(void* DS, int fruitID);
+	StatusType PickFruit(void* DS, int fruitID)
+	{
+		if (DS == NULL || fruitID <= 0)
+		{
+			return INVALID_INPUT;
+		}
+		if (((FieldManager*)DS)->findFruitByID(fruitID) == NULL )
+		{
+			return FAILURE;
+		}
+
+		return SUCCESS;
+
+	}
 
 	/* Description:   Updated a fruit's ripeness
 	 * Input:         DS - A pointer to the data structure.
@@ -139,7 +121,20 @@ extern "C" {
 	 *                FAILURE -	If fruitID doesn't exist
 	 *                SUCCESS - Otherwise.
 	 */
-	StatusType RateFruit(void* DS, int fruitID, int ripeRate);
+	StatusType RateFruit(void* DS, int fruitID, int ripeRate)
+	{
+		if (DS == NULL || fruitID <= 0 || ripeRate <= 0)
+		{
+			return INVALID_INPUT;
+		}
+		if (((FieldManager*)DS)->findFruitByID(fruitID) == NULL)
+		{
+			return FAILURE;
+		}
+		((FieldManager*)DS)->RateFruit(fruitID, ripeRate);
+		return SUCCESS;
+
+	}
 
 	/* Description:   Returns the best fruit in the (i,j)'th tree, by ripeness
 	 * Input:         DS - A pointer to the data structure.
@@ -151,7 +146,20 @@ extern "C" {
 	 *                FAILURE - If the (i,j)'th tree doesn't exist
 	 *                SUCCESS - Otherwise.
 	 */
-	StatusType GetBestFruit(void* DS, int i, int j, int* fruitID);
+	StatusType GetBestFruit(void* DS, int i, int j, int* fruitID)
+	{
+		if (DS == NULL || fruitID == NULL || i<0 || i> fieldSize - 1 || j<0 || j>fieldSize - 1)
+		{
+			return INVALID_INPUT;
+		}
+
+		if (((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
+		{
+			return FAILURE;
+		}
+		
+		return SUCCESS;
+	}
 
 	/* Description:   Returns all the fruits in the (i,j)'th tree sorted by their rate.
 	 * Input:         DS - A pointer to the data structure.
@@ -165,7 +173,18 @@ extern "C" {
 	 *                FAILURE - If the (i,j)'th tree doesn't exist
 	 *                SUCCESS - Otherwise.
 	 */
-	StatusType GetAllFruitsByRate(void* DS, int i, int j, int** fruits, int* numOfFruits);
+	StatusType GetAllFruitsByRate(void* DS, int i, int j, int** fruits, int* numOfFruits)
+	{
+		if (DS == NULL || i<0 || i> fieldSize - 1 || j<0 || j>fieldSize - 1 || fruits == NULL || numOfFruits == NULL)
+		{
+			return INVALID_INPUT;
+		}
+		if (((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
+		{
+			return FAILURE;
+		}
+		return SUCCESS;
+	}
 
 	/* Description:   Updates the ripeness of the fruits where fruitID % rottenBase == 0.
 	 * 				  For each matching fruit, multiplies its ripeness level by multiplyFactor.
@@ -177,8 +196,14 @@ extern "C" {
 	 *                INVALID_INPUT - If DS==NULL or if rottenBase < 1 or if rottenFactor < 1
 	 *                SUCCESS - Otherwise.
 	 */
-	StatusType UpdateRottenFruits(void* DS, int rottenBase, int rottenFactor);
-
+	StatusType UpdateRottenFruits(void* DS, int rottenBase, int rottenFactor)
+	{
+		if (DS == NULL || rottenBase < 1 || rottenFactor < 1)
+		{
+			return INVALID_INPUT;
+		}
+		return SUCCESS;
+	}
 
 	/* Description:   Quits and deletes the database.
 	 *                DS should be set to NULL.

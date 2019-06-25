@@ -10,7 +10,7 @@ using namespace std;
 class Tree
 {
 	int treeNum_;
-	AVL_Tree<Fruit> fruitRipeRateAVLTree;
+	AVL_Tree<int, Fruit>* fruitRipeRateAVLTree;
 
 
 public:
@@ -18,11 +18,13 @@ public:
 	Tree(int treeNum)
 	{
 		treeNum_ = treeNum;
+		fruitRipeRateAVLTree = new AVL_Tree<int, Fruit>();
 	}
 
 	Tree()
 	{
 		treeNum_ = NULL;
+		fruitRipeRateAVLTree = new AVL_Tree<int, Fruit>();
 	}
 
 	int getTreeNum()
@@ -32,8 +34,7 @@ public:
 	
 	void addFruit(Fruit* f)
 	{
-		AVL_Tree<Fruit>* myFruitRipeRateTree;
-		myFruitRipeRateTree->insert(f->getRipeRate(), f);
+		fruitRipeRateAVLTree->insert(f->getRipeRate(), f);
 	}
 
 

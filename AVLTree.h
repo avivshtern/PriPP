@@ -3,12 +3,12 @@
 #include <algorithm>
 #include <array>
 using namespace std;
-template <typename T>
+template <typename Key, typename T> // Key must have < and > operators implemented
 class AVL_Tree
 {
 	struct node
 	{
-		int value;
+		Key value;
 		T* data;
 		node* left;
 		node* right;
@@ -27,7 +27,7 @@ class AVL_Tree
 		delete t;
 	}
 
-	node* insert(int x, T* data, node* t)
+	node* insert(Key x, T* data, node* t)
 	{
 		if (t == NULL)
 		{
@@ -118,7 +118,7 @@ class AVL_Tree
 			return findMax(t->right);
 	}
 
-	node* remove(int x, node* t)
+	node* remove(Key x, node* t)
 	{
 		node* temp;
 
@@ -202,17 +202,7 @@ class AVL_Tree
 		inorder(t->right);
 	}
 
-	void inorderVisit(node* t, T* array[], int& i)
-	{
-		if (t == NULL)
-			return;
-		inorderVisit(t->left, array, i);
-		array[i] = t->data;
-		i += 1;
-		inorderVisit(t->right, array, i);
-	}
-
-	node* findNode(int x, node* t)
+	node* findNode(Key x, node* t)
 	{
 		// Element not found
 		if (t == NULL)
@@ -227,24 +217,24 @@ class AVL_Tree
 
 
 public:
-	
+
 
 	AVL_Tree()
 	{
 		root = NULL;
 	}
 
-	void insert(int x, T* data)
+	void insert(Key x, T* data)
 	{
 		root = insert(x, data, root);
 	}
 
-	void remove(int x)
+	void remove(Key x)
 	{
 		root = remove(x, root);
 	}
 
-	T* find(int x)
+	T* find(Key x)
 	{
 		node* n = findNode(x, root);
 		if (n != NULL)
@@ -254,22 +244,11 @@ public:
 		return NULL;
 	}
 
-	T** getSortedArray() {
-		T** array = new T * [numberOfNodes];
-		int counter = 0;
-		inorderVisit(root, array, counter);
-
-		for (int i = 0; i < numberOfNodes; i++) {
-			cout << "{ ripeRate: " << array[i]->ripeRate << ", id: " << array[i]->id << " }" << endl;
-		}
-		return array;
-	}
 	void display()
 	{
 		inorder(root);
 		cout << endl;
 
 	}
-
 
 };

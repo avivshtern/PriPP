@@ -29,6 +29,11 @@ public:
 		ripeRate_ = ripeRate;
 		parentTreeNum_ = parentTreeNum;
 	}
+
+	void changeRipeRate(int newRipeRate)
+	{
+		ripeRate_ = newRipeRate;
+	}
 	
 	int getID()
 	{
