@@ -181,6 +181,9 @@ extern "C" {
 		}
 		if (((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
 		{
+			Tree* fruitTree = ((FieldManager*)DS)->findTree(calculateTreeNum(i, j);
+			Fruit** orderdFruitsArray = fruitTree->getOrderdFruits();
+
 			return FAILURE;
 		}
 		return SUCCESS;
