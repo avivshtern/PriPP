@@ -3,6 +3,13 @@
 #include <algorithm>
 #include <array>
 using namespace std;
+
+template <typename Key, typename T>
+class Visitor {
+public:
+	virtual void visitNode(T* visitData) = 0;
+};
+
 template <typename Key, typename T> // Key must have < and > operators implemented
 class AVL_Tree
 {
@@ -16,7 +23,7 @@ class AVL_Tree
 	};
 
 	node* root;
-	int numberOfNodes = 0;
+
 
 	void makeEmpty(node* t)
 	{
@@ -31,7 +38,7 @@ class AVL_Tree
 	{
 		if (t == NULL)
 		{
-			numberOfNodes++;
+			size++;
 			t = new node;
 			t->value = x;
 			t->data = data;
@@ -149,7 +156,7 @@ class AVL_Tree
 			else if (t->right == NULL)
 				t = t->left;
 			delete temp;
-			numberOfNodes--;
+			size--;
 		}
 		if (t == NULL)
 			return t;
@@ -202,6 +209,16 @@ class AVL_Tree
 		inorder(t->right);
 	}
 
+	void inorderVisit(node* t, T* array[], int* index)
+	{
+		if (t == NULL)
+			return;
+		inorderVisit(t->left, array, index);
+		array[*index] = t->data;
+		*index += 1;
+		inorderVisit(t->right, array, index);
+	}
+
 	node* findNode(Key x, node* t)
 	{
 		// Element not found
@@ -215,9 +232,24 @@ class AVL_Tree
 		return t;
 	}
 
+	void deleteTree(node* t) {
+		if (t == NULL) return;
+		deleteTree(t->left);
+		deleteTree(t->right);
+		free(t);
+	}
+
+	void visit(node* t, Visitor<Key, T>* visitor) {
+		if (t == NULL) return;
+		visitor->visitNode(t->data);
+		visit(t->left, visitor);
+		visit(t->right, visitor);
+
+	}
+
 
 public:
-
+	int size = 0;
 
 	AVL_Tree()
 	{
@@ -247,8 +279,25 @@ public:
 	void display()
 	{
 		inorder(root);
-		cout << endl;
+		//cout << endl;
 
 	}
 
+	T** getOrderdArray() {
+		T** sortedArray = new T * [size];
+		int index = 0;
+		inorderVisit(root, sortedArray, &index);
+		return sortedArray;
+	}
+
+	void deleteTree() {
+		deleteTree(root);
+	}
+
+	void visit(Visitor<Key,T>* visitor) {
+		visit(root, visitor);
+	}
+
 };
+
+

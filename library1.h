@@ -198,10 +198,12 @@ extern "C" {
 	 */
 	StatusType UpdateRottenFruits(void* DS, int rottenBase, int rottenFactor)
 	{
-		if (DS == NULL || rottenBase < 1 || rottenFactor < 1)
-		{
+		if (DS == NULL || rottenBase < 1 || rottenFactor < 1){
+
 			return INVALID_INPUT;
 		}
+		((FieldManager*)DS)->UpdateRottenFruits(rottenBase, rottenFactor);
+
 		return SUCCESS;
 	}
 

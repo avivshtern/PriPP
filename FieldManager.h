@@ -1,10 +1,23 @@
 #ifndef FIELDMAMANGER_H
 #define FIELDMAMANGER_H
 #include <iostream>
-#include "Fruit.h"
 #include "Tree.h"
-#include "AVLTree.h"
 #include "StatusType.h"
+
+
+
+class UpdateRottenFruitsVisitor :public Visitor<int, Tree> {
+	int _rottenBase;
+	int _rottenFactor;
+public:
+	UpdateRottenFruitsVisitor(int rottenBase, int rottenFactor) {
+		_rottenBase = rottenBase;
+		_rottenFactor = rottenFactor;
+	}
+	virtual void visitNode(Tree* visitData) {
+		visitData->updateRottenFruits(_rottenBase, _rottenFactor);
+	}
+};
 
 using namespace std;
 class FieldManager
@@ -30,7 +43,7 @@ public:
 		Fruit* f = new Fruit(fruitID, ripeRate, treeNum);
 		Tree* t = treesTree->find(treeNum);
 		t->addFruit(f);
-		fruitsIDTree->insert(f);
+		fruitsIDTree->insert(f->getID(),f);
 	}
 
 	void pickFruit(int fruitID)
@@ -41,11 +54,13 @@ public:
 	void RateFruit(int fruitID, int ripeRate)
 	{
 		Fruit* f = fruitsIDTree->find(fruitID);
-		f.changeRipeRate(ripeRate);
+		f->changeRipeRate(ripeRate);
 	}
-
+	
 	void UpdateRottenFruits(int rottenBase, int rottenFactor)
 	{
+		UpdateRottenFruitsVisitor* visitor = new UpdateRottenFruitsVisitor(rottenBase, rottenFactor);
+		treesTree->visit(visitor);
 
 	}
 
@@ -58,9 +73,6 @@ public:
 	{
 		return treesTree->find(treeNum);
 	}
-
-
-
 };
 
 #endif

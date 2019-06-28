@@ -36,9 +36,31 @@ public:
 	{
 		fruitRipeRateAVLTree->insert(f->getRipeRate(), f);
 	}
+	/*
+	*/
+	Fruit** getOrderdFruits() {
+		return fruitRipeRateAVLTree->getOrderdArray();
+	}
 
-
-
+	void updateRottenFruits( int rottenBase, int rottenFactor){
+		Fruit** orderdFrouits =	getOrderdFruits();
+		for (int i = 0; i < fruitRipeRateAVLTree->size; i++) {
+			if ((orderdFrouits[i]->getID()) % rottenBase == 0) {
+				int newRipeRate = orderdFrouits[i]->getRipeRate() * rottenFactor;
+				orderdFrouits[i]->changeRipeRate(newRipeRate);
+			}
+		}
+		int treeSize = fruitRipeRateAVLTree->size;
+		fruitRipeRateAVLTree->deleteTree();
+		fruitRipeRateAVLTree = new AVL_Tree<int, Fruit>;
+		for (int i = 0; i < treeSize; i++) {
+			fruitRipeRateAVLTree->insert(orderdFrouits[i]->getRipeRate(), orderdFrouits[i]);
+		}
+		free(orderdFrouits);	
+	}
+	void display() {
+		fruitRipeRateAVLTree->display();
+	}
 };
 
 #endif
