@@ -261,6 +261,11 @@ public:
 		root = insert(x, data, root);
 	}
 
+	node* getMin()
+	{
+		return findMin(root);
+	}
+
 	void remove(Key x)
 	{
 		root = remove(x, root);

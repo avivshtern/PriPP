@@ -41,5 +41,8 @@
     <ClInclude Include="StatusType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FruitIDAndRipeRate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

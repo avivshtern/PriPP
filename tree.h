@@ -1,8 +1,10 @@
 #ifndef TREE_H
 #define TREE_H
+#include <iostream>
 #include "Fruit.h" 
 #include "AVLTree.h"
-#include <iostream>
+#include "FruitIDAndRipeRate.h"
+
 #define MAX_SIZE 10000
 
 using namespace std;
@@ -10,7 +12,7 @@ using namespace std;
 class Tree
 {
 	int treeNum_;
-	AVL_Tree<int, Fruit>* fruitRipeRateAVLTree;
+	AVL_Tree<FruitIDAndRipeRate, Fruit>* fruitRipeRateAVLTree;
 
 
 public:
@@ -18,13 +20,13 @@ public:
 	Tree(int treeNum)
 	{
 		treeNum_ = treeNum;
-		fruitRipeRateAVLTree = new AVL_Tree<int, Fruit>();
+		fruitRipeRateAVLTree = new AVL_Tree<FruitIDAndRipeRate, Fruit>();
 	}
 
 	Tree()
 	{
 		treeNum_ = NULL;
-		fruitRipeRateAVLTree = new AVL_Tree<int, Fruit>();
+		fruitRipeRateAVLTree = new AVL_Tree<FruitIDAndRipeRate, Fruit>();
 	}
 
 	int getTreeNum()
@@ -34,29 +36,40 @@ public:
 	
 	void addFruit(Fruit* f)
 	{
-		fruitRipeRateAVLTree->insert(f->getRipeRate(), f);
+		fruitRipeRateAVLTree->insert(f->getFruitIDAndRipeRate(), f);
 	}
-	/*
-	*/
-	Fruit** getOrderdFruits() {
+	
+	int pickFruit(int fruitID, int ripeRate)
+	{
+		FruitIDAndRipeRate <fruitID, ripeRate> key;
+		fruitRipeRateAVLTree->remove(key);
+	}
+
+	int getBestFruitID()
+	{
+		Fruit* f = fruitRipeRateAVLTree->getMin();
+		return f->getID;
+	}
+
+	Fruit** getOrderedFruits() {
 		return fruitRipeRateAVLTree->getOrderdArray();
 	}
 
 	void updateRottenFruits( int rottenBase, int rottenFactor){
-		Fruit** orderdFrouits =	getOrderdFruits();
+		Fruit** orderedFruits =	getOrderedFruits();
 		for (int i = 0; i < fruitRipeRateAVLTree->size; i++) {
-			if ((orderdFrouits[i]->getID()) % rottenBase == 0) {
-				int newRipeRate = orderdFrouits[i]->getRipeRate() * rottenFactor;
-				orderdFrouits[i]->changeRipeRate(newRipeRate);
+			if ((orderedFruits[i]->getID()) % rottenBase == 0) {
+				int newRipeRate = orderedFruits[i]->getRipeRate() * rottenFactor;
+				orderedFruits[i]->changeRipeRate(newRipeRate);
 			}
 		}
 		int treeSize = fruitRipeRateAVLTree->size;
 		fruitRipeRateAVLTree->deleteTree();
-		fruitRipeRateAVLTree = new AVL_Tree<int, Fruit>;
+		fruitRipeRateAVLTree = new AVL_Tree<FruitIDAndRipeRate, Fruit>;
 		for (int i = 0; i < treeSize; i++) {
-			fruitRipeRateAVLTree->insert(orderdFrouits[i]->getRipeRate(), orderdFrouits[i]);
+			fruitRipeRateAVLTree->insert(orderedFruits[i]->getFruitIDAndRipeRate(), orderedFruits[i]);
 		}
-		free(orderdFrouits);	
+		free(orderedFruits);	
 	}
 	void display() {
 		fruitRipeRateAVLTree->display();

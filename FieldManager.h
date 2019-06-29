@@ -23,56 +23,68 @@ using namespace std;
 class FieldManager
 {
 public:
-	AVL_Tree<int, Tree>* treesTree;
-	AVL_Tree<int, Fruit>* fruitsIDTree;
+	AVL_Tree<int, Tree>* treesAVLTree;
+	AVL_Tree<int, Fruit>* fruitsAVLIDTree;
 
 	FieldManager()
 	{
-		treesTree = new AVL_Tree<int, Tree>();
-		fruitsIDTree = new AVL_Tree<int, Fruit>();
+		treesAVLTree = new AVL_Tree<int, Tree>();
+		fruitsAVLIDTree = new AVL_Tree<int, Fruit>();
 	}
 
 	void plantTree(int treeNum)
 	{
 		Tree* t = new Tree(treeNum);
-		treesTree->insert(treeNum, t);
+		treesAVLTree->insert(treeNum, t);
 	}
 
 	void addFruit(int treeNum, int fruitID, int ripeRate)
 	{
 		Fruit* f = new Fruit(fruitID, ripeRate, treeNum);
-		Tree* t = treesTree->find(treeNum);
+		Tree* t = treesAVLTree->find(treeNum);
 		t->addFruit(f);
-		fruitsIDTree->insert(f->getID(),f);
+		fruitsAVLIDTree->insert(f->getID(),f);
 	}
 
 	void pickFruit(int fruitID)
 	{
-		int x;
+		Fruit* f = fruitsAVLIDTree->find(fruitID);
+		Tree* t = treesAVLTree->find(f->getParentTreeNum());
+		t->pickFruit(fruitID, f->getRipeRate());
+		fruitsAVLIDTree->remove(fruitID);
+		delete f;
+	}
+
+	void getBestFruit(int treeNum, int* bestFruitID)
+	{
+		Tree* t = treesAVLTree->find(treeNum);
+		bestFruitID = t->getBestFruitID; 
 	}
 
 	void RateFruit(int fruitID, int ripeRate)
 	{
-		Fruit* f = fruitsIDTree->find(fruitID);
+		Fruit* f = fruitsAVLIDTree->find(fruitID);
 		f->changeRipeRate(ripeRate);
 	}
 	
 	void UpdateRottenFruits(int rottenBase, int rottenFactor)
 	{
 		UpdateRottenFruitsVisitor* visitor = new UpdateRottenFruitsVisitor(rottenBase, rottenFactor);
-		treesTree->visit(visitor);
+		treesAVLTree->visit(visitor);
 
 	}
 
 	Fruit* findFruitByID(int fruitID)
 	{
-		return fruitsIDTree->find(fruitID);
+		return fruitsAVLIDTree->find(fruitID);
 	}
 
 	Tree* findTree(int treeNum)
 	{
-		return treesTree->find(treeNum);
+		return treesAVLTree->find(treeNum);
 	}
+
+
 };
 
 #endif

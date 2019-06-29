@@ -107,6 +107,8 @@ extern "C" {
 			return FAILURE;
 		}
 
+
+
 		return SUCCESS;
 
 	}
@@ -157,7 +159,7 @@ extern "C" {
 		{
 			return FAILURE;
 		}
-		
+		((FieldManager*)DS)->getBestFruit(calculateTreeNum(i, j),fruitID);
 		return SUCCESS;
 	}
 
@@ -181,11 +183,10 @@ extern "C" {
 		}
 		if (((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
 		{
-			Tree* fruitTree = ((FieldManager*)DS)->findTree(calculateTreeNum(i, j);
-			Fruit** orderdFruitsArray = fruitTree->getOrderdFruits();
-
 			return FAILURE;
 		}
+		Tree* fruitTree = ((FieldManager*)DS)->findTree(calculateTreeNum(i, j));
+		Fruit * *orderdFruitsArray = fruitTree->getOrderedFruits();
 		return SUCCESS;
 	}
 

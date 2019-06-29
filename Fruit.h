@@ -1,6 +1,7 @@
 #ifndef FRUIT_H
 #define FRUIT_H
 #include <iostream>
+#include "FruitIDAndRipeRate.h"
 
 using namespace std;
 class Fruit
@@ -15,12 +16,14 @@ public:
 	{
 		ID_ = -1;
 		ripeRate_ = -1;
+		parentTreeNum_ = -1;
 	}
 
 	Fruit(int id, int ripeRate)
 	{
 		ID_ = id;
 		ripeRate_ = ripeRate;
+		parentTreeNum_ = -1;
 	}
 
 	Fruit(int id, int ripeRate, int parentTreeNum)
@@ -48,6 +51,11 @@ public:
 	int getParentTreeNum()
 	{
 		return parentTreeNum_;
+	}
+
+	FruitIDAndRipeRate getFruitIDAndRipeRate()
+	{
+		return new FruitIDAndRipeRate(ID_, ripeRate_);
 	}
 
 };
