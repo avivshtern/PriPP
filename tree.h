@@ -51,11 +51,13 @@ public:
 		return f->getID;
 	}
 
-	Fruit** getOrderedFruits() {
+	Fruit** getOrderedFruits() 
+	{
 		return fruitRipeRateAVLTree->getOrderdArray();
 	}
 
-	void updateRottenFruits( int rottenBase, int rottenFactor){
+	void updateRottenFruits( int rottenBase, int rottenFactor)
+	{
 		Fruit** orderedFruits =	getOrderedFruits();
 		for (int i = 0; i < fruitRipeRateAVLTree->size; i++) {
 			if ((orderedFruits[i]->getID()) % rottenBase == 0) {

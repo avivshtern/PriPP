@@ -3,7 +3,7 @@
 #include "AVLTree.h"
 #include"Fruit.h"
 #include "Tree.h"
-#include "FieldManager.h"
+#include "FieldManager.h"s
 #include "StatusType.h"
 #ifdef __cplusplus
 extern "C" {
@@ -106,9 +106,7 @@ extern "C" {
 		{
 			return FAILURE;
 		}
-
-
-
+		((FieldManager*)DS)->pickFruit(fruitID);
 		return SUCCESS;
 
 	}
