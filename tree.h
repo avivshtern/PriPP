@@ -56,9 +56,12 @@ public:
 		return fruitRipeRateAVLTree->getOrderdArray();
 	}
 
-	void updateRottenFruits( int rottenBase, int rottenFactor)
-	{
-		Fruit** orderedFruits =	getOrderedFruits();
+	int getSize() {
+		return fruitRipeRateAVLTree->size;
+	}
+
+	void updateRottenFruits( int rottenBase, int rottenFactor){
+		Fruit** orderdFrouits =	getOrderdFruits();
 		for (int i = 0; i < fruitRipeRateAVLTree->size; i++) {
 			if ((orderedFruits[i]->getID()) % rottenBase == 0) {
 				int newRipeRate = orderedFruits[i]->getRipeRate() * rottenFactor;
@@ -75,6 +78,10 @@ public:
 	}
 	void display() {
 		fruitRipeRateAVLTree->display();
+	}
+
+	void deleteTree() {
+		fruitRipeRateAVLTree->deleteTree();
 	}
 };
 

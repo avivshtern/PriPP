@@ -8,7 +8,7 @@ class Fruit
 {
 	int ID_;
 	int ripeRate_;
-	int parentTreeNum_;
+	int parentTreeNum_ = 0;
 
 public:
 
