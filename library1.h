@@ -3,7 +3,7 @@
 #include "AVLTree.h"
 #include"Fruit.h"
 #include "Tree.h"
-#include "FieldManager.h"s
+#include "FieldManager.h"
 //#include "AVLTree.h"
 //#include"Fruit.h"
 //#include "Tree.h"
@@ -49,7 +49,7 @@ extern "C" {
 		{
 			return INVALID_INPUT;
 		}
-		if (((FieldManager*)DS)->findTree(calculateTreeNum(i,j)) = !NULL )
+		if (((FieldManager*)DS)->findTree(calculateTreeNum(i,j)) != NULL )
 		{
 			return FAILURE;
 		}
@@ -79,7 +79,7 @@ extern "C" {
 		{
 			return INVALID_INPUT;
 		}
-		if (((FieldManager*)DS)->findFruitByID(fruitID) = !NULL || ((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
+		if (((FieldManager*)DS)->findFruitByID(fruitID) != NULL || ((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
 		{
 			return FAILURE;
 		}
@@ -189,7 +189,7 @@ extern "C" {
 			return FAILURE;
 		}
 		fruits = ((FieldManager*)DS)->GetAllFruitsByRate(calculateTreeNum(i, j));
-		numOfFruits = ((FieldManager*)DS)->getTreeSize(calculateTreeNum(i, j));
+		*numOfFruits = ((FieldManager*)DS)->getTreeSize(calculateTreeNum(i, j));
 		return SUCCESS;
 	}
 

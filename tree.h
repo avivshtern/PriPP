@@ -41,14 +41,14 @@ public:
 	
 	int pickFruit(int fruitID, int ripeRate)
 	{
-		FruitIDAndRipeRate <fruitID, ripeRate> key;
+		FruitIDAndRipeRate key(fruitID, ripeRate);
 		fruitRipeRateAVLTree->remove(key);
 	}
 
 	int getBestFruitID()
 	{
 		Fruit* f = fruitRipeRateAVLTree->getMin();
-		return f->getID;
+		return f->getID();
 	}
 
 	Fruit** getOrderedFruits() 
@@ -61,7 +61,7 @@ public:
 	}
 
 	void updateRottenFruits( int rottenBase, int rottenFactor){
-		Fruit** orderdFrouits =	getOrderdFruits();
+		Fruit** orderedFruits =	getOrderedFruits();
 		for (int i = 0; i < fruitRipeRateAVLTree->size; i++) {
 			if ((orderedFruits[i]->getID()) % rottenBase == 0) {
 				int newRipeRate = orderedFruits[i]->getRipeRate() * rottenFactor;

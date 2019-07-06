@@ -1,3 +1,6 @@
+#ifndef AVLTREE_H
+#define AVLTREE_H
+
 #include <iostream>
 #include<iostream>
 #include <algorithm>
@@ -261,7 +264,7 @@ public:
 		root = insert(x, data, root);
 	}
 
-	node* getMin()
+	T* getMin()
 	{
 		return findMin(root);
 	}
@@ -306,5 +309,9 @@ public:
 	}
 
 };
+
+#endif
+
+
 
 

@@ -23,6 +23,12 @@ public:
 		ripeRate_ = ripeRate;
 	}
 
+	FruitIDAndRipeRate(const FruitIDAndRipeRate &other)
+	{
+		ID_ = other.ID_;
+		ripeRate_ = other.ripeRate_;
+	}
+
 	bool operator >(FruitIDAndRipeRate &other)
 	{
 		if (ripeRate_ > other.ripeRate_)

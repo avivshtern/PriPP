@@ -65,7 +65,7 @@ public:
 	void getBestFruit(int treeNum, int* bestFruitID)
 	{
 		Tree* t = treesAVLTree->find(treeNum);
-		bestFruitID = t->getBestFruitID; 
+		*bestFruitID = t->getBestFruitID(); 
 	}
 
 	void RateFruit(int fruitID, int ripeRate)
@@ -93,7 +93,7 @@ public:
 
 	int* GetAllFruitsByRate(int treeNum){
 		Tree* tree = findTree(treeNum);
-		Fruit** OrderdFruits = tree->getOrderdFruits();
+		Fruit** OrderdFruits = tree->getOrderedFruits();
 		int* OrderdFruitsIDs = new int [tree->getSize()];
 		for (int i = 0; i < tree->getSize(); i++) {
 			OrderdFruitsIDs[i] = OrderdFruits[i]->getID();
@@ -108,10 +108,10 @@ public:
 	}
 
 	void deleteField() {
-		fruitsIDTree->deleteTree();
+		fruitsAVLIDTree->deleteTree();
 		deleteFruitsVisitor* deleteVisitor = new deleteFruitsVisitor();
-		treesTree->visit(deleteVisitor);
-		treesTree->deleteTree();
+		treesAVLTree->visit(deleteVisitor);
+		treesAVLTree->deleteTree();
 	}
 };
 

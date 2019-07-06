@@ -55,7 +55,7 @@ public:
 
 	FruitIDAndRipeRate getFruitIDAndRipeRate()
 	{
-		return new FruitIDAndRipeRate(ID_, ripeRate_);
+		return FruitIDAndRipeRate(ID_, ripeRate_);
 	}
 
 };
