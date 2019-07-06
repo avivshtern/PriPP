@@ -236,7 +236,7 @@ class AVL_Tree
 		if (t == NULL) return;
 		deleteTree(t->left);
 		deleteTree(t->right);
-		free(t);
+		delete t;
 	}
 
 	void visit(node* t, Visitor<Key, T>* visitor) {
@@ -278,7 +278,9 @@ public:
 
 	void display()
 	{
-		inorder(root);
+		if (root != NULL) {
+			inorder(root);
+		}
 		//cout << endl;
 
 	}

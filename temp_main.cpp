@@ -93,4 +93,5 @@ int main()
 	cout << "  -  tree2 ";
 	tree2->display();
 	cout << endl;
+	Orchard.deleteField();
 }

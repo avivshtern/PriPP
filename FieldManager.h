@@ -19,6 +19,13 @@ public:
 	}
 };
 
+class deleteFruitsVisitor :public Visitor<int, Tree> {
+public:
+	virtual void visitNode(Tree* visitData) {
+		visitData->deleteTree();
+	}
+};
+
 using namespace std;
 class FieldManager
 {
@@ -72,6 +79,29 @@ public:
 	Tree* findTree(int treeNum)
 	{
 		return treesTree->find(treeNum);
+	}
+
+	int* GetAllFruitsByRate(int treeNum){
+		Tree* tree = findTree(treeNum);
+		Fruit** OrderdFruits = tree->getOrderdFruits();
+		int* OrderdFruitsIDs = new int [tree->getSize()];
+		for (int i = 0; i < tree->getSize(); i++) {
+			OrderdFruitsIDs[i] = OrderdFruits[i]->getID();
+		}
+		return OrderdFruitsIDs;
+	}
+
+
+	int getTreeSize(int treeNum) {
+		Tree* tree = findTree(treeNum);
+		return tree->getSize();
+	}
+
+	void deleteField() {
+		fruitsIDTree->deleteTree();
+		deleteFruitsVisitor* deleteVisitor = new deleteFruitsVisitor();
+		treesTree->visit(deleteVisitor);
+		treesTree->deleteTree();
 	}
 };
 
