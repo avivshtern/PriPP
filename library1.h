@@ -173,7 +173,7 @@ extern "C" {
 	 *                FAILURE - If the (i,j)'th tree doesn't exist
 	 *                SUCCESS - Otherwise.
 	 */
-	StatusType GetAllFruitsByRate(void* DS, int i, int j, int* fruits, int* numOfFruits)
+	StatusType GetAllFruitsByRate(void* DS, int i, int j, int** fruits, int* numOfFruits)
 	{
 		if (DS == NULL || i<0 || i> fieldSize - 1 || j<0 || j>fieldSize - 1 || fruits == NULL || numOfFruits == NULL)
 		{
@@ -184,8 +184,10 @@ extern "C" {
 
 			return FAILURE;
 		}
-		fruits = ((FieldManager*)DS)->GetAllFruitsByRate(calculateTreeNum(i, j));
-		numOfFruits = ((FieldManager*)DS)->getTreeSize(calculateTreeNum(i, j));
+		int* fruitsIdByRate = ((FieldManager*)DS)->GetAllFruitsByRate(calculateTreeNum(i, j));
+		fruits = &fruitsIdByRate;
+		int fruitsIdByRateSize = ((FieldManager*)DS)->getTreeSize(calculateTreeNum(i, j));
+		numOfFruits = &fruitsIdByRateSize;
 		return SUCCESS;
 	}
 
