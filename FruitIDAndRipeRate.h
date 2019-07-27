@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Fruit.h"
 
+
 using namespace std;
 class FruitIDAndRipeRate
 {
@@ -21,6 +22,13 @@ public:
 	{
 		ID_ = id;
 		ripeRate_ = ripeRate;
+	}
+
+	friend ostream& operator << (ostream& os, const FruitIDAndRipeRate& fidarr)
+	{
+		cout << "Fruit ID: " << fidarr.ID_;
+		cout << "Fruit ripe rate: " << fidarr.ripeRate_;
+		return os;
 	}
 
 	FruitIDAndRipeRate(const FruitIDAndRipeRate &other)

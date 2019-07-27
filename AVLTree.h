@@ -266,7 +266,8 @@ public:
 
 	T* getMin()
 	{
-		return findMin(root);
+		node* n = findMin(root);
+		return n->data;
 	}
 
 	void remove(Key x)

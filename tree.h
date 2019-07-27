@@ -39,7 +39,7 @@ public:
 		fruitRipeRateAVLTree->insert(f->getFruitIDAndRipeRate(), f);
 	}
 	
-	int pickFruit(int fruitID, int ripeRate)
+	void pickFruit(int fruitID, int ripeRate)
 	{
 		FruitIDAndRipeRate key(fruitID, ripeRate);
 		fruitRipeRateAVLTree->remove(key);
