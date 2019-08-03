@@ -5,8 +5,6 @@
 #include "AVLTree.h"
 #include "FruitIDAndRipeRate.h"
 
-#define MAX_SIZE 10000
-
 using namespace std;
 
 class Tree
@@ -56,7 +54,8 @@ public:
 		return fruitRipeRateAVLTree->getOrderdArray();
 	}
 
-	int getSize() {
+	int getSize() 
+	{
 		return fruitRipeRateAVLTree->size;
 	}
 

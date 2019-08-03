@@ -62,6 +62,12 @@ public:
 		delete f;
 	}
 
+	int FruitsNumOnTree(int treeNum)
+	{
+		Tree* t = treesAVLTree->find(treeNum);
+		return t->getSize();
+	}
+
 	void getBestFruit(int treeNum, int* bestFruitID)
 	{
 		Tree* t = treesAVLTree->find(treeNum);
@@ -93,12 +99,12 @@ public:
 
 	int* GetAllFruitsByRate(int treeNum){
 		Tree* tree = findTree(treeNum);
-		Fruit** OrderdFruits = tree->getOrderedFruits();
-		int* OrderdFruitsIDs = new int [tree->getSize()];
+		Fruit** OrderedFruits = tree->getOrderedFruits();
+		int* OrderedFruitsIDs = (int*)malloc(tree->getSize() * sizeof(int));
 		for (int i = 0; i < tree->getSize(); i++) {
-			OrderdFruitsIDs[i] = OrderdFruits[i]->getID();
+			OrderedFruitsIDs[i] = OrderedFruits[i]->getID();
 		}
-		return OrderdFruitsIDs;
+		return OrderedFruitsIDs;
 	}
 
 

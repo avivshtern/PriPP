@@ -156,12 +156,18 @@ extern "C" {
 		{
 			return INVALID_INPUT;
 		}
-
 		if (((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
 		{
 			return FAILURE;
 		}
-		((FieldManager*)DS)->getBestFruit(calculateTreeNum(i, j),fruitID);
+		if (((FieldManager*)DS)->FruitsNumOnTree(calculateTreeNum(i, j)) == 0)
+		{
+			*fruitID = -1;
+		}
+		else
+		{
+			((FieldManager*)DS)->getBestFruit(calculateTreeNum(i, j), fruitID);
+		}
 		return SUCCESS;
 	}
 
@@ -185,13 +191,12 @@ extern "C" {
 		}
 		if (((FieldManager*)DS)->findTree(calculateTreeNum(i, j)) == NULL)
 		{
-
 			return FAILURE;
 		}
 		int* fruitsIdByRate = ((FieldManager*)DS)->GetAllFruitsByRate(calculateTreeNum(i, j));
-		fruits = &fruitsIdByRate;
+		*fruits = fruitsIdByRate;
 		int fruitsIdByRateSize = ((FieldManager*)DS)->getTreeSize(calculateTreeNum(i, j));
-		numOfFruits = &fruitsIdByRateSize;
+		*numOfFruits = fruitsIdByRateSize;
 		return SUCCESS;
 	}
 

@@ -125,7 +125,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="temp_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldManager.h" />
