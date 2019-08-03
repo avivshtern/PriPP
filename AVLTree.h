@@ -148,6 +148,7 @@ class AVL_Tree
 		{
 			temp = findMin(t->right);
 			t->value = temp->value;
+			t->data = temp->data;
 			t->right = remove(t->value, t->right);
 		}
 		// With one or zero child
@@ -208,11 +209,12 @@ class AVL_Tree
 		if (t == NULL)
 			return;
 		inorder(t->left);
-		cout << t->value << " ";
+		//cout << t->value << " --- data: "  << *(t->data) << " ";
+		cout << t->value;
 		inorder(t->right);
 	}
 
-	void inorderVisit(node* t, T* array[], int* index)
+	void inorderVisit(node* t, T** array, int* index)
 	{
 		if (t == NULL)
 			return;

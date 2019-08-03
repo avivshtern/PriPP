@@ -77,14 +77,23 @@ public:
 	void RateFruit(int fruitID, int ripeRate)
 	{
 		Fruit* f = fruitsAVLIDTree->find(fruitID);
+		int previousRipeRate = f->getRipeRate();
 		f->changeRipeRate(ripeRate);
+		Tree* t = treesAVLTree->find(f->getParentTreeNum());
+		/*cout << "Tree before pick fruit + add fruit:" << endl;
+		t->display();*/
+		t->pickFruit(fruitID, previousRipeRate);
+		/*cout << "Tree after pick fruit:" << endl;
+		t->display();*/
+		t->addFruit(f);
+		/*cout << "tree after add fruit:" << endl;
+		t->display();*/
 	}
 	
 	void UpdateRottenFruits(int rottenBase, int rottenFactor)
 	{
 		UpdateRottenFruitsVisitor* visitor = new UpdateRottenFruitsVisitor(rottenBase, rottenFactor);
 		treesAVLTree->visit(visitor);
-
 	}
 
 	Fruit* findFruitByID(int fruitID)

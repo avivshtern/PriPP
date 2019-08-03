@@ -34,7 +34,11 @@ public:
 	
 	void addFruit(Fruit* f)
 	{
+		//cout << "before add fruit:" << endl;
+		//display();
 		fruitRipeRateAVLTree->insert(f->getFruitIDAndRipeRate(), f);
+		//cout << "after add fruit:" << endl;
+		//display();
 	}
 	
 	void pickFruit(int fruitID, int ripeRate)

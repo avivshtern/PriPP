@@ -33,6 +33,12 @@ public:
 		parentTreeNum_ = parentTreeNum;
 	}
 
+	friend ostream& operator << (ostream& os, const Fruit& f)
+	{
+		cout << f.ID_ << " (" << f.ripeRate_ << ")" << endl;
+		return os;
+	}
+
 	void changeRipeRate(int newRipeRate)
 	{
 		ripeRate_ = newRipeRate;

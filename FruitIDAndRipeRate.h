@@ -26,8 +26,7 @@ public:
 
 	friend ostream& operator << (ostream& os, const FruitIDAndRipeRate& fidarr)
 	{
-		cout << "Fruit ID: " << fidarr.ID_;
-		cout << "Fruit ripe rate: " << fidarr.ripeRate_;
+		cout << endl << fidarr.ID_ << " (" << fidarr.ripeRate_ << ")";
 		return os;
 	}
 
@@ -53,7 +52,7 @@ public:
 			{
 				return true;
 			}
-			if (ID_ < other.ID_)
+			if (ID_ <= other.ID_)
 			{
 				return false;
 			}
@@ -76,7 +75,7 @@ public:
 			{
 				return true;
 			}
-			if (ID_ > other.ID_)
+			if (ID_ >= other.ID_)
 			{
 				return false;
 			}
