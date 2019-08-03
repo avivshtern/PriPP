@@ -27,6 +27,11 @@ public:
 		fruitRipeRateAVLTree = new AVL_Tree<FruitIDAndRipeRate, Fruit>();
 	}
 
+	~Tree()
+	{
+		delete fruitRipeRateAVLTree;
+	}
+
 	int getTreeNum()
 	{
 		return treeNum_;
@@ -34,11 +39,7 @@ public:
 	
 	void addFruit(Fruit* f)
 	{
-		//cout << "before add fruit:" << endl;
-		//display();
 		fruitRipeRateAVLTree->insert(f->getFruitIDAndRipeRate(), f);
-		//cout << "after add fruit:" << endl;
-		//display();
 	}
 	
 	void pickFruit(int fruitID, int ripeRate)

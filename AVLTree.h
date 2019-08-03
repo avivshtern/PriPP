@@ -169,10 +169,10 @@ class AVL_Tree
 
 		// If node is unbalanced
 		// If left node is deleted, right case
-		if (height(t->left) - height(t->right) == 2)
+		if (height(t->left) - height(t->right) == -2)
 		{
 			// right right case
-			if (height(t->left->left) - height(t->left->right) == 1)
+			if (height(t->right->right) - height(t->right->left) == 1)
 				return singleLeftRotate(t);
 			// right left case
 			else
@@ -182,8 +182,9 @@ class AVL_Tree
 		else if (height(t->right) - height(t->left) == 2)
 		{
 			// left left case
-			if (height(t->right->right) - height(t->right->left) == 1)
+			if (height(t->left->left) - height(t->left->right) == 1) {
 				return singleRightRotate(t);
+			}
 			// left right case
 			else
 				return doubleRightRotate(t);
@@ -209,7 +210,6 @@ class AVL_Tree
 		if (t == NULL)
 			return;
 		inorder(t->left);
-		//cout << t->value << " --- data: "  << *(t->data) << " ";
 		cout << t->value;
 		inorder(t->right);
 	}
@@ -261,6 +261,11 @@ public:
 		root = NULL;
 	}
 
+	~AVL_Tree()
+	{
+		//makeEmpty(root);
+	}
+
 	void insert(Key x, T* data)
 	{
 		root = insert(x, data, root);
@@ -292,8 +297,6 @@ public:
 		if (root != NULL) {
 			inorder(root);
 		}
-		//cout << endl;
-
 	}
 
 	T** getOrderdArray() {
@@ -304,7 +307,8 @@ public:
 	}
 
 	void deleteTree() {
-		deleteTree(root);
+		makeEmpty(root);
+		//deleteTree(root);
 	}
 
 	void visit(Visitor<Key,T>* visitor) {

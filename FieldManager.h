@@ -80,14 +80,8 @@ public:
 		int previousRipeRate = f->getRipeRate();
 		f->changeRipeRate(ripeRate);
 		Tree* t = treesAVLTree->find(f->getParentTreeNum());
-		/*cout << "Tree before pick fruit + add fruit:" << endl;
-		t->display();*/
 		t->pickFruit(fruitID, previousRipeRate);
-		/*cout << "Tree after pick fruit:" << endl;
-		t->display();*/
 		t->addFruit(f);
-		/*cout << "tree after add fruit:" << endl;
-		t->display();*/
 	}
 	
 	void UpdateRottenFruits(int rottenBase, int rottenFactor)
@@ -123,10 +117,17 @@ public:
 	}
 
 	void deleteField() {
-		fruitsAVLIDTree->deleteTree();
-		deleteFruitsVisitor* deleteVisitor = new deleteFruitsVisitor();
+		if (fruitsAVLIDTree != NULL)
+		{
+			fruitsAVLIDTree->deleteTree();
+		}
+		if (treesAVLTree != NULL)
+		{
+			treesAVLTree->deleteTree();
+		}
+		/*deleteFruitsVisitor* deleteVisitor = new deleteFruitsVisitor();
 		treesAVLTree->visit(deleteVisitor);
-		treesAVLTree->deleteTree();
+		treesAVLTree->deleteTree();*/
 	}
 };
 
