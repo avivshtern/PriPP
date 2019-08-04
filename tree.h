@@ -29,6 +29,7 @@ public:
 
 	~Tree()
 	{
+		cout << "deleting tree";
 		delete fruitRipeRateAVLTree;
 	}
 

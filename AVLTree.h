@@ -263,7 +263,7 @@ public:
 
 	~AVL_Tree()
 	{
-		//makeEmpty(root);
+		makeEmpty(root);
 	}
 
 	void insert(Key x, T* data)

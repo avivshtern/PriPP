@@ -228,7 +228,9 @@ extern "C" {
 	 * Return Values: None.
 	 */
 	void Quit(void** DS) {
-		((FieldManager*)DS)->deleteField();
+
+		((FieldManager*)*DS)->deleteField();
+		*DS = NULL;
 	};
 
 #ifdef __cplusplus
