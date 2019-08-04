@@ -308,7 +308,6 @@ public:
 
 	void deleteTree() {
 		makeEmpty(root);
-		//deleteTree(root);
 	}
 
 	void visit(Visitor<Key,T>* visitor) {

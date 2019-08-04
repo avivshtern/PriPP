@@ -125,9 +125,6 @@ public:
 		{
 			treesAVLTree->deleteTree();
 		}
-		/*deleteFruitsVisitor* deleteVisitor = new deleteFruitsVisitor();
-		treesAVLTree->visit(deleteVisitor);
-		treesAVLTree->deleteTree();*/
 	}
 };
 
